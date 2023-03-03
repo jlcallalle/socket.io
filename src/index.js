@@ -14,6 +14,8 @@ app.get("/", (req, res) => {
 });
 
 io.on("connection", socket => {
+    console.log('websocket Server');
+    console.log('socket handshake', socket.handshake);
     console.log('socket id', socket.id);
     console.log('Clientes conectados', io.engine.clientsCount);
     // console.log('socket handshake', socket.handshake);
