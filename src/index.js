@@ -22,6 +22,11 @@ io.on("connection", socket => {
     /* socket.on ("disconnect", () => {
         console.log("El socket " + socket.id + "se ha desconectado");
     }) */
+
+    socket.conn.once("upgrade", () => {
+        console.log("Hemos pasado de HTTP Long-Polling a ", socket.conn.transport.name);
+    });
+    
 });
 
 httpServer.listen(3000);
