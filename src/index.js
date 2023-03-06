@@ -5,8 +5,14 @@ const { Server } = require("socket.io");
 
 const app = express();
 const httpServer = createServer(app);
-const io = new Server(httpServer);
-
+// const io = new Server(httpServer);
+const io = new Server(httpServer, {
+    cors: {
+        // origin: "https://my-frontend.com",
+        origin: ["https://invex.modyo.be/", "https://socket-io-jlcallalle.vercel.app/", "http://localhost:3000"],
+        credentials: true
+      }
+});
 app.use( express.static(path.join(__dirname, "views")) );
 
 app.get("/", (req, res) => {
