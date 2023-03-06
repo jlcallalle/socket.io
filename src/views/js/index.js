@@ -1,5 +1,12 @@
-// const socket = io();
-const socket = io("http://localhost:3000/", { forceNew: true })
+const socket = io();
+// const socket = io("http://localhost:3000/", { forceNew: true })
+
+socket.on("welcome", data => {
+    const text = document.querySelector("#text");
+    text.textContent = data;
+    console.log(data);
+});
+
 const contenedor = document.getElementById('contenedor');
 
 function checkSocketStatus() {

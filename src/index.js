@@ -14,6 +14,8 @@ app.get("/", (req, res) => {
 });
 
 io.on("connection", socket => {
+
+    // Información Servidor
     console.log('websocket Server');
     console.log('socket handshake', socket.handshake);
     console.log('socket id', socket.id);
@@ -23,9 +25,12 @@ io.on("connection", socket => {
         console.log("El socket " + socket.id + "se ha desconectado");
     }) */
 
-    socket.conn.once("upgrade", () => {
+    /* socket.conn.once("upgrade", () => {
         console.log("Hemos pasado de HTTP Long-Polling a ", socket.conn.transport.name);
-    });
+    }); */
+
+    // Emisión básica
+    socket.emit("welcome", "Ahora estás conectado  Jorge 😎...");
     
 });
 
