@@ -8,9 +8,7 @@ const httpServer = createServer(app);
 // const io = new Server(httpServer);
 const io = new Server(httpServer, {
     cors: {
-        // origin: "https://my-frontend.com",
-        origin: ["https://invex.modyo.be/", "https://socket-io-jlcallalle.vercel.app/", "http://localhost:3000"],
-        credentials: true
+        origin: ["https://invex.modyo.be/", "https://socket-io-jlcallalle.vercel.app/"],
       }
 });
 app.use( express.static(path.join(__dirname, "views")) );
@@ -26,7 +24,6 @@ io.on("connection", socket => {
     console.log('socket handshake', socket.handshake);
     console.log('socket id', socket.id);
     console.log('Clientes conectados', io.engine.clientsCount);
-    // console.log('socket handshake', socket.handshake);
     /* socket.on ("disconnect", () => {
         console.log("El socket " + socket.id + "se ha desconectado");
     }) */
@@ -35,8 +32,16 @@ io.on("connection", socket => {
         console.log("Hemos pasado de HTTP Long-Polling a ", socket.conn.transport.name);
     }); */
 
-    // Emisión básica
+    // Envia emit a cliente
     socket.emit("welcome", "Ahora estás conectado  Jorge 😎...");
+
+    // Recibe emit del servidor
+    socket.on("server", data => {
+        console.log(data);
+    });
+
+    // Emisión a todos
+    io.emit("everyone", socket.id + " se ha conectado 👀")
     
 });
 

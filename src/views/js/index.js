@@ -1,12 +1,5 @@
-// const socket = io();
-const socket = io("http://localhost:3000/", { forceNew: true })
-
-socket.on("welcome", data => {
-    const text = document.querySelector("#text");
-    text.textContent = data;
-    console.log(data);
-});
-
+const socket = io();
+// const socket = io("http://localhost:3000/", { forceNew: true });
 const contenedor = document.getElementById('contenedor');
 
 function checkSocketStatus() {
@@ -26,10 +19,8 @@ socket.on("connect_error", () => {
 })
 
 socket.on("disconnect", () => {
-
     console.log("El socket se ha desconectado: ", socket.id);
     checkSocketStatus();
-
 });
 
 socket.io.on("reconnect_attempt", () => {
@@ -38,4 +29,23 @@ socket.io.on("reconnect_attempt", () => {
 
 socket.io.on("reconnect", () => {
     console.log("¡Me he vuelto a conectar! 😎");
+});
+
+// recibe emit del servidor 
+socket.on("welcome", data => {
+    const text = document.querySelector("#text");
+    text.textContent = data;
+    console.log(data);
+});
+
+// renvia emit al servidor
+const emitToServer = document.querySelector("#emit-to-server");
+emitToServer.addEventListener("click", () => {
+
+    socket.emit("server", "Hola, servidor 👀");
+
+});
+
+socket.on("everyone", message => {
+    console.log(message);
 });
