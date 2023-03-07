@@ -1,3 +1,5 @@
+//process.env.DEBUG = "*";
+process.env.DEBUG = "engine, socket.io:socket, socket.io:client";
 const express = require("express");
 const path = require("path");
 const { createServer } = require("http");
@@ -8,7 +10,7 @@ const httpServer = createServer(app);
 // const io = new Server(httpServer);
 const io = new Server(httpServer, {
     cors: {
-        origin: ["https://invex.modyo.be/", "https://socket-io-jlcallalle.vercel.app/"],
+        origin: ["https://invex.modyo.be/", "https://c7a3-179-6-171-28.ngrok.io"],
       }
 });
 app.use( express.static(path.join(__dirname, "views")) );

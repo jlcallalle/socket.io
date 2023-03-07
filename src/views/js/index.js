@@ -1,5 +1,6 @@
-// const socket = io();
-const socket = io("http://localhost:3000/", { forceNew: true });
+const socket = io();
+// const socket = io("http://localhost:3000/", { forceNew: true });
+// const socket = io("https://c7a3-179-6-171-28.ngrok.io", { forceNew: true });
 const contenedor = document.getElementById('contenedor');
 
 function checkSocketStatus() {
