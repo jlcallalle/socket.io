@@ -26,7 +26,7 @@ instrument(io, {
     auth: {
         type: "basic",
         username: "admin",
-        password: "$2a$04$jOtX8wrr6MPA1xmHir4rWeFTt9hZWNIPwIXDichFyTD0nKbI1xTz6"
+        password: "$2a$12$T3TafGkHPG57LD5jbsynQ.0zBmXjKB.VJG6fj5ekz/DEBxDk768.i"
     }
 });
 
