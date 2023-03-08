@@ -12,7 +12,7 @@ const httpServer = createServer(app);
 const io = new Server(httpServer, {
     cors: {
         // origin: ["https://invex.modyo.be/", "https://c7a3-179-6-171-28.ngrok.io"],
-        origin: ["https://admin.socket.io", "https://invex.modyo.be/", "https://socket-io-jlcallalle.vercel.app/"],
+        origin: 'https://invex.modyo.be',
         credentials: true
     }
 });
