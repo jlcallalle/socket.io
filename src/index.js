@@ -32,11 +32,15 @@ instrument(io, {
 
 app.use( express.static(path.join(__dirname, "views")) );
 
+const socketsOnline = [];
+
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/views/index.html");
 });
 
 io.on("connection", socket => {
+
+    socketsOnline.push(socket.id);
 
     // Información Servidor
     console.log('websocket Server');
@@ -60,7 +64,15 @@ io.on("connection", socket => {
     });
 
     // Emisión a todos
-    io.emit("everyone", socket.id + " se ha conectado 👀")
+    io.emit("everyone", socket.id + " se ha conectado 👀");
+
+    // Emisión a uno solo
+    socket.on("last", message => {
+
+        const lastSocket = socketsOnline[ socketsOnline.length - 1 ];
+        io.to(lastSocket).emit("salute", message);
+
+    })
     
 });
 

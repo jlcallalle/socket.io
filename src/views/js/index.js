@@ -47,6 +47,21 @@ emitToServer.addEventListener("click", () => {
 
 });
 
+
 socket.on("everyone", message => {
+    console.log(message);
+});
+
+
+// renvia emit al último conectado
+const emitToLast = document.querySelector("#emit-to-last");
+emitToLast.addEventListener("click", () => {
+
+    socket.emit("last", "Hola 😄");
+
+});
+
+
+socket.on("salute", message => {
     console.log(message);
 });
