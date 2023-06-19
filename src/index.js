@@ -35,7 +35,7 @@ app.use( express.static(path.join(__dirname, "views")) );
 const socketsOnline = [];
 
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/views/index.html");
+    res.sendFile(__dirname + "/views/sala.html");
 });
 
 io.on("connection", socket => {
@@ -76,7 +76,7 @@ io.on("connection", socket => {
     
 });
 
-// Evento broadcast (envia evento a todos los usuarios conectados )
+// ejemplo circulo Eento broadcast (envia evento a todos los usuarios conectados )
 io.on("connection", socket => {
 
     socket.on("circle position", position => {
@@ -85,4 +85,46 @@ io.on("connection", socket => {
 
 });
 
+// ejemplo socket salas
+io.on("connection", socket => {
+
+    socket.connectedRoom = "";
+
+    socket.on("connect to room", room => {
+
+        socket.leave(socket.connectedRoom);
+
+        switch (room) {
+
+            case "room1":
+                socket.join("room1");
+                socket.connectedRoom = "room1";
+                break;
+
+            case "room2":
+                socket.join("room2");
+                socket.connectedRoom = "room2";
+                break;
+
+            case "room3":
+                socket.join("room3");
+                socket.connectedRoom = "room3";
+                break;
+
+        }
+
+    });
+
+    socket.on("message", message => {
+
+        const room = socket.connectedRoom;
+
+        io.to(room).emit("send message", {
+            message,
+            room
+        });
+
+    });
+
+});
 httpServer.listen(3000);
