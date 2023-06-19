@@ -92,6 +92,7 @@ io.on("connection", socket => {
 
     socket.on("connect to room", room => {
 
+        // retirar de sala
         socket.leave(socket.connectedRoom);
 
         switch (room) {
