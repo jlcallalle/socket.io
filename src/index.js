@@ -76,4 +76,13 @@ io.on("connection", socket => {
     
 });
 
+// Evento broadcast (envia evento a todos los usuarios conectados )
+io.on("connection", socket => {
+
+    socket.on("circle position", position => {
+        socket.broadcast.emit("move circle", position);
+    });
+
+});
+
 httpServer.listen(3000);
