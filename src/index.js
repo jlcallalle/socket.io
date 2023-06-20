@@ -88,10 +88,10 @@ io.on("connection", socket => {
 // ejemplo socket salas
 io.on("connection", socket => {
 
-    socket.connectedRoom = "";
+    socket.connectedRoom = ""; 
+    // guardar sala ala que estoy conectado 
 
     socket.on("connect to room", room => {
-
         // retirar de sala
         socket.leave(socket.connectedRoom);
 
@@ -128,4 +128,31 @@ io.on("connection", socket => {
     });
 
 });
+
+// NAMESPACES
+
+const teachers = io.of("teachers");
+const students = io.of("students");
+
+teachers.on("connection", socket => {
+
+    console.log(socket.id + " se ha conectado a la sala de profes");
+
+    socket.on("send message", data => {
+        teachers.emit("message", data);
+    });
+
+});
+
+students.on("connection", socket => {
+
+    console.log(socket.id + " se ha conectado a la sala de estudiantes");
+
+    socket.on("send message", data => {
+        students.emit("message", data);
+    });
+
+});
+
+
 httpServer.listen(3000);

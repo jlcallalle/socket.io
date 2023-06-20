@@ -8,16 +8,10 @@
     <title>¡Servidor con Express y Socket.io!</title>
 </head>
 <body>
-    
-    <h1>Ejemplo Socket:</h1>
-    <div id="contenedor">Socket id:</div>
-    <p id="text"></p>
-    <button id="emit-to-server">Presioname 👀</button>
-    <button id="emit-to-last">Saluda al último conectado 😈</button>
-    <br>
-    <br>
-    <div id="circle"></div>
+    <h1>Chat de <span id="namespace"></span></h1>
+    <ul id="chat"></ul>
+    <button id="sendMessage">Enviar mensaje</button>
     <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"></script>
-    <script src="js/index.js"></script>
+    <script src="js/namespace.js"></script>
 </body>
 </html>
