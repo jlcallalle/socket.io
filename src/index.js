@@ -154,5 +154,14 @@ students.on("connection", socket => {
 
 });
 
+// OFFLINE
+
+io.on("connection", socket => {
+
+    socket.on("is connected", msg => {
+        console.log(msg);
+    })
+
+});
 
 httpServer.listen(3000);
