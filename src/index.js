@@ -13,23 +13,24 @@ const httpServer = createServer(app);
 const io = new Server(httpServer, {
     cors: {
         // origin: ["https://invex.modyo.be/", "https://c7a3-179-6-171-28.ngrok.io"],
-        origin: 'https://invex.modyo.be',
+        origin: ["https://invex.modyo.be/", "https://admin.socket.io"],
+        // origin: 'https://invex.modyo.be',
         credentials: true
     }
 });
 
 // habilitar usar admin.ui
-/* instrument(io, {
-    auth: false
-}); */
-
 instrument(io, {
+    auth: false
+});
+
+/* instrument(io, {
     auth: {
         type: "basic",
         username: "admin",
-        password: "$2a$12$T3TafGkHPG57LD5jbsynQ.0zBmXjKB.VJG6fj5ekz/DEBxDk768.i"
+        password: "d67326a22642a324aa1b0745f2f17abb"
     }
-});
+}); */
 
 app.use( express.static(path.join(__dirname, "views")) );
 
