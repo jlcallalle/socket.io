@@ -38,13 +38,34 @@ app.get("/", (req, res) => {
     res.sendFile(__dirname + "/views/sala.html");
 });
 
+// Middleware para determinar si está autenticado o no
+io.use( (socket, next) => {
+
+    const token = socket.handshake.auth.token;
+
+    if (token == "Mr. Michi es genial") {
+        next();
+    }
+    else {
+
+        const err = new Error("No puedes pasar >:c");
+        err.data = {
+            details: "No pudiste ser autenticado"
+        }
+
+        next(err);
+
+    }
+
+} );
+
 io.on("connection", socket => {
 
     socketsOnline.push(socket.id);
 
     // Información Servidor
     console.log('websocket Server');
-    // console.log('socket handshake', socket.handshake);
+    console.log('socket handshake', socket.handshake);
     console.log('socket id', socket.id);
     console.log('Clientes conectados', io.engine.clientsCount);
     /* socket.on ("disconnect", () => {
