@@ -1,5 +1,6 @@
-//process.env.DEBUG = "*";
+// process.env.DEBUG = "*";
 // process.env.DEBUG = "engine, socket.io:socket, socket.io:client";
+// process.env.DEBUG = "socket.io:client";
 const express = require("express");
 const path = require("path");
 const { createServer } = require("http");
@@ -65,7 +66,7 @@ io.on("connection", socket => {
 
     // Información Servidor
     console.log('websocket Server');
-    console.log('socket handshake', socket.handshake);
+    // console.log('socket handshake', socket.handshake);
     console.log('socket id', socket.id);
     console.log('Clientes conectados', io.engine.clientsCount);
     /* socket.on ("disconnect", () => {
